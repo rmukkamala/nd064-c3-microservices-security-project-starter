@@ -1,0 +1,13 @@
+How will you test the changes?
+
+There are three environments: development, staging and production. I will test the changes in the development environment first to test out the 
+Kubernetes functionality and performance after hardening. As the hardening can affect the behavior of etcd, master and control plane. 
+I will also monitor metrics that are available through observability and monitoring techniques using 
+Prometheus and Grafana to make these changes do not degrade performance and generate extraneous loads on the system. 
+
+How will you ensure the changes don't negatively affect your cluster?
+
+There should be a checklist to check the cluster components and services that would be affected. These checks should be done before and
+after the change is done to confirm if the change does not cause any unforeseen service outage. A reverse plan should be inplace to revert the
+changes if environment is negatively affected. Finally, and also important, the cluster should have backups in case a restore is needed in worst
+case scenario.

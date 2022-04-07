@@ -1,0 +1,22 @@
+1. Incident commander name: 
+    Singam
+
+2. Executive Summary of what happened:
+    Falco runtime monitoring detected security breach and was reported on Falco Dashboard via Grafana. 
+    Crypto miners pods were executed in the cluster resulting in CPU and memory usage spikes.
+
+3. Summary of what was affected:
+    The attacker managed to run crypto miners on our system, which is a security breach. The Kubernetes API server had been compromised and 
+    accessed by an unauthorised personal to introduce and execute the pods. This affects the whole cluster's performance and security.
+
+4. Summmry of the impact:
+    This has caused a spike in CPU and memory utilisation. Also Falco detected crypto miners using the stratum protocol based on Crypto rules.
+
+5. Summary of the remediation steps:
+    Run the following command to evict the pods:
+        `kubectl --kubeconfig kube_config_cluster.yml delete pod <pod_name> --grace-period=0 --force>`
+    Now that the prods are evicted, check the Grafana dashboard again for CPU utilization. The CPU utilization shall start to fall as the crypto mining pods are evicted.
+
+6. Summary of lessons learned:
+    Administrative terminals and authentication credentials should be accessible by authorised personal only. Admission controllers can also be
+    configured to disallow unknown images to be used to create containers.
